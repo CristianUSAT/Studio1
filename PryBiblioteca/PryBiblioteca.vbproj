@@ -100,6 +100,7 @@
   <ItemGroup>
     <Content Include="biblioteca.jpg" />
     <Content Include="frmLector.aspx" />
+    <Content Include="frmLibro.aspx" />
     <Content Include="Global.asax" />
     <Content Include="login.png" />
     <Content Include="principal.jpg" />
@@ -117,6 +118,13 @@
     <Compile Include="frmLector.aspx.vb">
       <DependentUpon>frmLector.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmLibro.aspx.designer.vb">
+      <DependentUpon>frmLibro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="frmLibro.aspx.vb">
+      <DependentUpon>frmLibro.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
