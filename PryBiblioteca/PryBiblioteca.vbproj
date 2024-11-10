@@ -47,10 +47,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="prjCapaDatos">
-      <HintPath>..\..\..\..\..\Music\SistemaBiblioteca-master\SistemaBiblioteca-master\prjCapaNegocio\bin\Debug\prjCapaDatos.dll</HintPath>
+      <HintPath>..\..\SistemaBiblioteca-master\SistemaBiblioteca-master\prjCapaNegocio\bin\Debug\prjCapaDatos.dll</HintPath>
     </Reference>
     <Reference Include="prjCapaNegocio">
-      <HintPath>..\..\..\..\..\Music\SistemaBiblioteca-master\SistemaBiblioteca-master\prjCapaNegocio\bin\Debug\prjCapaNegocio.dll</HintPath>
+      <HintPath>..\..\SistemaBiblioteca-master\SistemaBiblioteca-master\prjCapaNegocio\bin\Debug\prjCapaNegocio.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -103,6 +103,8 @@
     <Content Include="Global.asax" />
     <Content Include="login.png" />
     <Content Include="principal.jpg" />
+    <Content Include="refe\prjCapaDatos.dll" />
+    <Content Include="refe\prjCapaNegocio.dll" />
     <Content Include="Web.config" />
     <Content Include="WebForm1.aspx" />
     <Content Include="HomePage.aspx" />
