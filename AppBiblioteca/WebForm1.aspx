@@ -21,7 +21,7 @@
             display: flex;
             width: 800px;
             background-color: #f4f4f9;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             border-radius: 8px;
             overflow: hidden;
         }
