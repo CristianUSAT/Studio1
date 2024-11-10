@@ -117,7 +117,7 @@
     </Compile>
     <Compile Include="frmEditorial.aspx.vb">
       <DependentUpon>frmEditorial.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="frmLector.aspx.designer.vb">
       <DependentUpon>frmLector.aspx</DependentUpon>
