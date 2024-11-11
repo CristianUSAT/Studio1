@@ -28,9 +28,9 @@
             text-decoration: none;
         }
 
-        .back-button:hover {
-            color: #007fa3;
-        }
+            .back-button:hover {
+                color: #007fa3;
+            }
 
         .container {
             display: flex;
@@ -55,36 +55,36 @@
             padding: 20px;
         }
 
-        .sidebar i {
-            font-size: 40px;
-            margin-bottom: 20px;
-        }
+            .sidebar i {
+                font-size: 40px;
+                margin-bottom: 20px;
+            }
 
-        .sidebar .button {
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 10px;
-            font-size: 16px;
-            background-color: #ffffff;
-            color: #00bcd4;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            text-decoration: none;
-        }
+            .sidebar .button {
+                width: 100%;
+                margin-bottom: 10px;
+                padding: 10px;
+                font-size: 16px;
+                background-color: #ffffff;
+                color: #00bcd4;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                text-decoration: none;
+            }
 
-        .sidebar .button:hover {
-            background-color: #00a1b2;
-            color: #ffffff;
-        }
+                .sidebar .button:hover {
+                    background-color: #00a1b2;
+                    color: #ffffff;
+                }
 
-        .sidebar .button i {
-            margin-right: 10px;
-        }
+                .sidebar .button i {
+                    margin-right: 10px;
+                }
 
         /* Form styles */
         .form-section {
@@ -94,11 +94,11 @@
             flex-direction: column;
         }
 
-        .form-section h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
+            .form-section h2 {
+                text-align: center;
+                color: #333;
+                margin-bottom: 20px;
+            }
 
         .form-group {
             display: flex;
@@ -106,26 +106,26 @@
             margin-bottom: 15px;
         }
 
-        .form-group label {
-            width: 120px;
-            color: #333;
-        }
+            .form-group label {
+                width: 120px;
+                color: #333;
+            }
 
-        .form-group input[type="text"], 
-        .form-group input[type="password"],
-        .form-group select {
-            flex: 1;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
+            .form-group input[type="text"],
+            .form-group input[type="password"],
+            .form-group select {
+                flex: 1;
+                padding: 8px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
 
-        .form-group i {
-            font-size: 18px;
-            margin-left: 10px;
-            cursor: pointer;
-            color: #00bcd4;
-        }
+            .form-group i {
+                font-size: 18px;
+                margin-left: 10px;
+                cursor: pointer;
+                color: #00bcd4;
+            }
 
         /* Table styles */
         .data-table {
@@ -134,17 +134,17 @@
             margin-top: 20px;
         }
 
-        .data-table th, .data-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
+            .data-table th, .data-table td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
 
-        .data-table th {
-            background-color: #00bcd4;
-            color: #ffffff;
-        }
-        
+            .data-table th {
+                background-color: #00bcd4;
+                color: #ffffff;
+            }
+
         /* Estilos para el mensaje */
         .message {
             color: red;
@@ -167,25 +167,28 @@
             .container {
                 flex-direction: column;
             }
+
             .sidebar, .form-section {
                 width: 100%;
             }
+
             .sidebar {
                 flex-direction: row;
                 flex-wrap: wrap;
                 justify-content: center;
             }
-            .sidebar .button {
-                margin: 5px;
-                flex: 1 1 40%;
-            }
+
+                .sidebar .button {
+                    margin: 5px;
+                    flex: 1 1 40%;
+                }
         }
     </style>
 </head>
 <body>
     <!-- Botón de regresar fuera del formulario -->
     <a href="HomePage.aspx" class="back-button">
-        <i class="fas fa-arrow-left"></i> Regresar
+        <i class="fas fa-arrow-left"></i>Regresar
     </a>
 
     <form id="form1" runat="server">
@@ -215,25 +218,26 @@
 
                 <div class="form-group">
                     <label for="txtDNI">DNI:</label>
-                    <asp:TextBox ID="txtDNI" runat="server" MaxLength="8"></asp:TextBox>
+                    <asp:TextBox ID="txtDNI" runat="server" MaxLength="8" onkeypress="return isNumber(event)"></asp:TextBox>
                     <i class="fas fa-search" onclick="document.getElementById('<%= btnBuscar.ClientID %>').click()"></i>
-                    <asp:Button ID="btnBuscar" runat="server" Text="" OnClick="btnBuscar_Click" Style="display:none;" />
+                    <asp:Button ID="btnBuscar" runat="server" Text="" OnClick="btnBuscar_Click" Style="display: none;" />
                 </div>
 
                 <div class="form-group">
                     <label for="txtNombres">Nombres:</label>
-                    <asp:TextBox ID="txtNombres" runat="server" />
+                    <asp:TextBox ID="txtNombres" runat="server" onkeypress="return isLetter(event)" />
                 </div>
 
                 <div class="form-group">
                     <label for="txtApellidoPat">Ap. Paterno:</label>
-                    <asp:TextBox ID="txtApellidoPat" runat="server" />
+                    <asp:TextBox ID="txtApellidoPat" runat="server" onkeypress="return isLetter(event)" />
                 </div>
 
                 <div class="form-group">
                     <label for="txtApellidoMat">Ap. Materno:</label>
-                    <asp:TextBox ID="txtApellidoMat" runat="server" />
+                    <asp:TextBox ID="txtApellidoMat" runat="server" onkeypress="return isLetter(event)" />
                 </div>
+
 
                 <div class="form-group">
                     <label for="cbxPregunta">Pregunta Secreta:</label>
@@ -257,7 +261,7 @@
                     <Columns>
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:LinkButton ID="lnkSelect" runat="server" CommandName="Select" Text="" Style="display:none;"></asp:LinkButton>
+                                <asp:LinkButton ID="lnkSelect" runat="server" CommandName="Select" Text="" Style="display: none;"></asp:LinkButton>
                             </ItemTemplate>
                             <ItemStyle Width="0px" CssClass="hidden-button" />
                         </asp:TemplateField>
@@ -274,4 +278,26 @@
         </div>
     </form>
 </body>
+<script>
+    function isNumber(event) {
+        var charCode = (event.which) ? event.which : event.keyCode;
+        // Permitir solo números (0-9)
+        if (charCode < 48 || charCode > 57) {
+            event.preventDefault();
+            return false;
+        }
+        return true;
+    }
+    function isLetter(event) {
+        var charCode = (event.which) ? event.which : event.keyCode;
+        // Permitir solo letras (mayúsculas y minúsculas) y espacio
+        if ((charCode >= 65 && charCode <= 90) || // Letras mayúsculas
+            (charCode >= 97 && charCode <= 122) || // Letras minúsculas
+            charCode === 32) { // Espacio
+            return true;
+        }
+        event.preventDefault();
+        return false;
+    }
+</script>
 </html>
