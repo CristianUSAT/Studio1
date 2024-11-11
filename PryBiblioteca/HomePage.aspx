@@ -174,7 +174,7 @@
                         <div>
                             <div class="dropdown-title">Inventario</div>
                             <a href="#">Libros</a>
-                            <a href="#">Materiales</a>
+                            <a href="frmEditorial.aspx">Editorial</a>
                         </div>
                     </div>
                 </div>
