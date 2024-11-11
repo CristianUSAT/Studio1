@@ -207,7 +207,8 @@ Public Class frmBibliotecario
         txtPassword.Text = ""
         cbxPregunta.SelectedIndex = 0
         txtRespuesta.Text = ""
-        txtPassword.Text = ""
+        txtPassword.Attributes("value") = "" ' Limpiar el valor visual del campo password
+
     End Sub
 
     Protected Sub dgvBibliotecario_RowDataBound(sender As Object, e As GridViewRowEventArgs) Handles dgvBibliotecario.RowDataBound
