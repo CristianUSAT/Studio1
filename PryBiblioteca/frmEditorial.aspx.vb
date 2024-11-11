@@ -21,15 +21,38 @@ Public Class frmEditorial
         End Try
     End Sub
 
+    Protected Sub btnNuevo_Click(sender As Object, e As EventArgs)
+        Try
+            ' Generar un nuevo ID para la editorial y mostrarlo en el campo de código
+            Dim idEditorial As Integer = objEditorial.generarIdEditorial()
+            txtCodigo.Text = idEditorial.ToString()
+
+            ' Habilitar el botón GUARDAR
+            btnGuardar.Enabled = True
+
+            ' Limpiar otros campos para un nuevo registro
+            txtNombre.Text = ""
+            txtDireccion.Text = ""
+            txtTelefono.Text = ""
+            chkVigencia.Checked = False
+
+            lblMessage.Text = "Nuevo código generado. Complete los campos."
+        Catch ex As Exception
+            lblMessage.Text = "Error al generar nuevo código: " & ex.Message
+        End Try
+    End Sub
+
     Protected Sub btnGuardar_Click(sender As Object, e As EventArgs)
         If ValidarCampos() Then
             Try
-                ' Generar un nuevo ID para la editorial
-                Dim idEditorial As Integer = objEditorial.generarIdEditorial()
+                ' Registrar la nueva editorial con el ID generado y datos ingresados
+                Dim idEditorial As Integer = Convert.ToInt32(txtCodigo.Text)
                 objEditorial.registrarEditorial(idEditorial, txtNombre.Text, txtDireccion.Text, txtTelefono.Text, chkVigencia.Checked)
+
                 lblMessage.Text = "Editorial guardada con éxito."
                 CargarEditoriales() ' Recargar la tabla para reflejar el nuevo registro
                 LimpiarCampos() ' Limpiar los campos después de guardar
+                btnGuardar.Enabled = False ' Deshabilitar el botón GUARDAR nuevamente
             Catch ex As Exception
                 lblMessage.Text = "Error al guardar editorial: " & ex.Message
             End Try
@@ -37,6 +60,11 @@ Public Class frmEditorial
     End Sub
 
     Protected Sub btnModificar_Click(sender As Object, e As EventArgs)
+        If String.IsNullOrEmpty(txtCodigo.Text) Then
+            lblMessage.Text = "Por favor, ingrese un código para modificar."
+            Return
+        End If
+
         If ValidarCampos() Then
             Try
                 objEditorial.modificarEditorial(Convert.ToInt32(txtCodigo.Text), txtNombre.Text, txtDireccion.Text, txtTelefono.Text, chkVigencia.Checked)
