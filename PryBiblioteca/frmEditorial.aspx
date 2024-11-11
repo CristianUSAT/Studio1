@@ -177,6 +177,26 @@
                 align-items: flex-start;
             }
         }
+
+        .input-similar {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .btn-lupa {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            color: #00796b;
+            margin-left: 10px;
+        }
+        .btn-lupa:hover {
+            color: #005f5b;
+        }
+
     </style>
 </head>
 <body>
@@ -185,8 +205,7 @@
             <!-- Sidebar con botones -->
             <div class="sidebar">
                 <i class="fas fa-book"></i>
-                <asp:Button ID="btnNuevo" runat="server" CssClass="btn" OnClick="btnNuevo_Click" Text="NUEVO" />
-                <asp:Button ID="btnGuardar" runat="server" CssClass="btn" OnClick="btnGuardar_Click" Text="GUARDAR" Enabled="False" />
+                <asp:Button ID="btnAccion" runat="server" CssClass="btn" OnClick="btnAccion_Click" Text="NUEVO" />
                 <asp:Button ID="btnModificar" runat="server" CssClass="btn" OnClick="btnModificar_Click" Text="MODIFICAR" />
                 <asp:Button ID="btnDarBaja" runat="server" CssClass="btn" OnClick="btnDarBaja_Click" Text="DAR DE BAJA" />
                 <asp:Button ID="btnLimpiar" runat="server" CssClass="btn" OnClick="btnLimpiar_Click" Text="LIMPIAR" />
@@ -202,9 +221,8 @@
 
                     <div class="form-group">
                         <label for="txtCodigo">Código:</label>
-                        <asp:TextBox ID="txtCodigo" runat="server"></asp:TextBox>
-                        <asp:Button ID="btnBuscar" runat="server" Style="display:none;" OnClick="btnBuscar_Click" />
-                        <i class="fas fa-search" onclick="__doPostBack('<%= btnBuscar.ClientID %>', '');"></i>
+                        <asp:TextBox ID="txtCodigo" runat="server" TextMode="Number" CssClass="input-similar" oninput="if (this.value < 1) this.value = 1;"></asp:TextBox>
+                        <asp:Button ID="btnBuscarLupa" runat="server" CssClass="btn-lupa" OnClick="btnBuscar_Click" Text="🔍" />
                     </div>
 
                     <div class="form-group">

@@ -5,10 +5,12 @@ Public Class frmEditorial
     Inherits System.Web.UI.Page
 
     Dim objEditorial As New clsEditorial ' Instancia de la clase clsEditorial
+    Private isNuevo As Boolean = True ' Variable para controlar el estado del botón
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             CargarEditoriales()
+            btnAccion.Text = "NUEVO"
         End If
     End Sub
 
@@ -21,41 +23,40 @@ Public Class frmEditorial
         End Try
     End Sub
 
-    Protected Sub btnNuevo_Click(sender As Object, e As EventArgs)
-        Try
-            ' Generar un nuevo ID para la editorial y mostrarlo en el campo de código
-            Dim idEditorial As Integer = objEditorial.generarIdEditorial()
-            txtCodigo.Text = idEditorial.ToString()
-
-            ' Habilitar el botón GUARDAR
-            btnGuardar.Enabled = True
-
-            ' Limpiar otros campos para un nuevo registro
-            txtNombre.Text = ""
-            txtDireccion.Text = ""
-            txtTelefono.Text = ""
-            chkVigencia.Checked = False
-
-            lblMessage.Text = "Nuevo código generado. Complete los campos."
-        Catch ex As Exception
-            lblMessage.Text = "Error al generar nuevo código: " & ex.Message
-        End Try
-    End Sub
-
-    Protected Sub btnGuardar_Click(sender As Object, e As EventArgs)
-        If ValidarCampos() Then
+    Protected Sub btnAccion_Click(sender As Object, e As EventArgs)
+        If isNuevo Then
+            ' Lógica para el botón "Nuevo"
             Try
-                ' Registrar la nueva editorial con el ID generado y datos ingresados
-                Dim idEditorial As Integer = Convert.ToInt32(txtCodigo.Text)
-                objEditorial.registrarEditorial(idEditorial, txtNombre.Text, txtDireccion.Text, txtTelefono.Text, chkVigencia.Checked)
+                Dim idEditorial As Integer = objEditorial.generarIdEditorial()
+                txtCodigo.Text = idEditorial.ToString()
 
-                lblMessage.Text = "Editorial guardada con éxito."
-                CargarEditoriales() ' Recargar la tabla para reflejar el nuevo registro
-                LimpiarCampos() ' Limpiar los campos después de guardar
-                btnGuardar.Enabled = False ' Deshabilitar el botón GUARDAR nuevamente
+                txtNombre.Text = ""
+                txtDireccion.Text = ""
+                txtTelefono.Text = ""
+                chkVigencia.Checked = False
+
+                lblMessage.Text = "Nuevo código generado. Complete los campos."
+                btnAccion.Text = "GUARDAR" ' Cambiar el texto a "Guardar"
+                isNuevo = False ' Cambiar el estado a Guardar
             Catch ex As Exception
-                lblMessage.Text = "Error al guardar editorial: " & ex.Message
+                lblMessage.Text = "Error al generar nuevo código: " & ex.Message
             End Try
+        Else
+            ' Lógica para el botón "Guardar"
+            If ValidarCampos() Then
+                Try
+                    Dim idEditorial As Integer = Convert.ToInt32(txtCodigo.Text)
+                    objEditorial.registrarEditorial(idEditorial, txtNombre.Text, txtDireccion.Text, txtTelefono.Text, chkVigencia.Checked)
+
+                    lblMessage.Text = "Editorial guardada con éxito."
+                    CargarEditoriales() ' Recargar la tabla
+                    LimpiarCampos() ' Limpiar los campos después de guardar
+                    btnAccion.Text = "NUEVO" ' Cambiar el texto a "Nuevo"
+                    isNuevo = True ' Cambiar el estado a Nuevo
+                Catch ex As Exception
+                    lblMessage.Text = "Error al guardar editorial: " & ex.Message
+                End Try
+            End If
         End If
     End Sub
 
@@ -95,7 +96,11 @@ Public Class frmEditorial
                 txtNombre.Text = row("nombre").ToString()
                 txtDireccion.Text = row("direccion").ToString()
                 txtTelefono.Text = row("telefono").ToString()
-                chkVigencia.Checked = (row("vigencia").ToString() = "1")
+
+                ' Manejo de la columna vigencia
+                Dim vigenciaValue = row("vigencia").ToString().ToLower()
+                chkVigencia.Checked = (vigenciaValue = "1" OrElse vigenciaValue = "true")
+
                 lblMessage.Text = "Editorial encontrada."
             Else
                 lblMessage.Text = "No se encontró ninguna editorial con ese código."
@@ -105,6 +110,7 @@ Public Class frmEditorial
             lblMessage.Text = "Error al buscar editorial: " & ex.Message
         End Try
     End Sub
+
 
     Protected Sub btnDarBaja_Click(sender As Object, e As EventArgs)
         If String.IsNullOrEmpty(txtCodigo.Text) Then
@@ -128,6 +134,8 @@ Public Class frmEditorial
         txtDireccion.Text = ""
         txtTelefono.Text = ""
         chkVigencia.Checked = False
+        btnAccion.Text = "NUEVO" ' Reiniciar el botón a "Nuevo"
+        isNuevo = True ' Reiniciar el estado a Nuevo
     End Sub
 
     Private Function ValidarCampos() As Boolean
