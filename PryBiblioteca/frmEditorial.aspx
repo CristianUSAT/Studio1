@@ -185,7 +185,8 @@
             <!-- Sidebar con botones -->
             <div class="sidebar">
                 <i class="fas fa-book"></i>
-                <asp:Button ID="btnGuardar" runat="server" CssClass="btn" OnClick="btnGuardar_Click" Text="GUARDAR" />
+                <asp:Button ID="btnNuevo" runat="server" CssClass="btn" OnClick="btnNuevo_Click" Text="NUEVO" />
+                <asp:Button ID="btnGuardar" runat="server" CssClass="btn" OnClick="btnGuardar_Click" Text="GUARDAR" Enabled="False" />
                 <asp:Button ID="btnModificar" runat="server" CssClass="btn" OnClick="btnModificar_Click" Text="MODIFICAR" />
                 <asp:Button ID="btnDarBaja" runat="server" CssClass="btn" OnClick="btnDarBaja_Click" Text="DAR DE BAJA" />
                 <asp:Button ID="btnLimpiar" runat="server" CssClass="btn" OnClick="btnLimpiar_Click" Text="LIMPIAR" />
