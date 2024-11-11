@@ -14,22 +14,13 @@ Option Explicit On
 Partial Public Class frmEditorial
 
     '''<summary>
-    '''Control form1.
+    '''Control btnAccion.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-
-    '''<summary>
-    '''Control btnNuevo.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents btnNuevo As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnAccion As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''Control btnModificar.
@@ -38,16 +29,16 @@ Partial Public Class frmEditorial
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnModificar As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnModificar As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''Control btnDarDeBaja.
+    '''Control btnDarBaja.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnDarDeBaja As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnDarBaja As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''Control btnLimpiar.
@@ -56,7 +47,7 @@ Partial Public Class frmEditorial
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnLimpiar As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnLimpiar As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''Control btnSalir.
@@ -65,7 +56,16 @@ Partial Public Class frmEditorial
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnSalir As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnSalir As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control lblMessage.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblMessage As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Control txtCodigo.
@@ -77,13 +77,13 @@ Partial Public Class frmEditorial
     Protected WithEvents txtCodigo As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control btnBuscar.
+    '''Control btnBuscarLupa.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnBuscar As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnBuscarLupa As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''Control txtNombre.

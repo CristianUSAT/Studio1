@@ -7,7 +7,6 @@
     <title>Registrar Nuevo Bibliotecario</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        /* Estilos generales */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;

@@ -14,7 +14,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-image: url('biblioteca.jpg'); /* Ruta de la imagen de fondo */
+            background-image: url('biblioteca.jpg');
             background-size: cover;
             background-position: center;
         }

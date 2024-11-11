@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeFile="frmEditorial.aspx.vb" Inherits="frmEditorial" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="frmEditorial.aspx.vb" Inherits="PryBiblioteca.frmEditorial" %>
 
 <!DOCTYPE html>
 <html lang="es">
