@@ -169,6 +169,7 @@
                             <div class="dropdown-title">Biblioteca</div>
                             <a href="frmBibliotecario.aspx">Bibliotecarios</a>
                             <a href="frmLector.aspx">Lectores</a>
+                            <a href="frmAutor.aspx">Autores</a>
                         </div>
                         <div>
                             <div class="dropdown-title">Inventario</div>
