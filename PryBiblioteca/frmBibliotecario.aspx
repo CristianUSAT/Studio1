@@ -7,24 +7,41 @@
     <title>Registrar Nuevo Bibliotecario</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        /* General styles */
+        /* Estilos generales */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
+            align-items: flex-start;
+            min-height: 100vh;
             margin: 0;
+            padding: 20px;
         }
-        
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 20px;
+            color: #00bcd4;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            color: #007fa3;
+        }
+
         .container {
             display: flex;
-            width: 800px;
+            flex-direction: row;
+            width: 100%;
+            max-width: 1200px;
             background-color: #ffffff;
             border-radius: 8px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             overflow: hidden;
+            margin-top: 20px;
         }
 
         /* Sidebar styles */
@@ -43,7 +60,7 @@
             margin-bottom: 20px;
         }
 
-        .sidebar button {
+        .sidebar .button {
             width: 100%;
             margin-bottom: 10px;
             padding: 10px;
@@ -57,14 +74,15 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
+            text-decoration: none;
         }
 
-        .sidebar button:hover {
+        .sidebar .button:hover {
             background-color: #00a1b2;
             color: #ffffff;
         }
 
-        .sidebar button i {
+        .sidebar .button i {
             margin-right: 10px;
         }
 
@@ -106,6 +124,7 @@
             font-size: 18px;
             margin-left: 10px;
             cursor: pointer;
+            color: #00bcd4;
         }
 
         /* Table styles */
@@ -126,46 +145,79 @@
             color: #ffffff;
         }
         
-        /* Styles for message label */
+        /* Estilos para el mensaje */
         .message {
             color: red;
             font-weight: bold;
             margin-bottom: 15px;
             text-align: center;
         }
+
+        /* Estilos para ocultar el botón y expandir el área clicable */
+        .hidden-button a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Ajustes responsivos */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .sidebar, .form-section {
+                width: 100%;
+            }
+            .sidebar {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .sidebar .button {
+                margin: 5px;
+                flex: 1 1 40%;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Botón de regresar fuera del formulario -->
+    <a href="HomePage.aspx" class="back-button">
+        <i class="fas fa-arrow-left"></i> Regresar
+    </a>
+
     <form id="form1" runat="server">
         <div class="container">
             <!-- Sidebar -->
             <div class="sidebar">
-                <i class="fas fa-user"></i>
-                <button type="button" onclick="guardarBibliotecario()">
+                <asp:LinkButton ID="btnGuardar" runat="server" CssClass="button" OnClick="btnGuardar_Click">
                     <i class="fas fa-save"></i> GUARDAR
-                </button>
-                <button type="button" onclick="modificarBibliotecario()">
+                </asp:LinkButton>
+                <asp:LinkButton ID="btnModificar" runat="server" CssClass="button" OnClick="btnModificar_Click">
                     <i class="fas fa-edit"></i> MODIFICAR
-                </button>
-                <button type="button" onclick="limpiarFormulario()">
+                </asp:LinkButton>
+                <asp:LinkButton ID="btnLimpiar" runat="server" CssClass="button" OnClick="btnLimpiar_Click">
                     <i class="fas fa-eraser"></i> LIMPIAR
-                </button>
-                <button type="button" onclick="cerrarFormulario()">
+                </asp:LinkButton>
+                <asp:LinkButton ID="btnSalir" runat="server" CssClass="button" OnClick="btnSalir_Click">
                     <i class="fas fa-sign-out-alt"></i> SALIR
-                </button>
+                </asp:LinkButton>
             </div>
 
             <!-- Formulario -->
             <div class="form-section">
                 <h2>REGISTRAR NUEVO BIBLIOTECARIO</h2>
 
-                <!-- Label for messages -->
+                <!-- Mensaje para el usuario -->
                 <asp:Label ID="lblMessage" runat="server" CssClass="message" />
 
                 <div class="form-group">
                     <label for="txtDNI">DNI:</label>
-                    <asp:TextBox ID="txtDNI" runat="server" />
-                    <i class="fas fa-search" onclick="buscarBibliotecario()"></i>
+                    <asp:TextBox ID="txtDNI" runat="server" MaxLength="8"></asp:TextBox>
+                    <i class="fas fa-search" onclick="document.getElementById('<%= btnBuscar.ClientID %>').click()"></i>
+                    <asp:Button ID="btnBuscar" runat="server" Text="" OnClick="btnBuscar_Click" Style="display:none;" />
                 </div>
 
                 <div class="form-group">
@@ -185,7 +237,8 @@
 
                 <div class="form-group">
                     <label for="cbxPregunta">Pregunta Secreta:</label>
-                    <asp:DropDownList ID="cbxPregunta" runat="server" />
+                    <asp:DropDownList ID="cbxPregunta" runat="server" EnableViewState="True" />
+
                 </div>
 
                 <div class="form-group">
@@ -198,25 +251,27 @@
                     <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" />
                 </div>
 
-                <!-- Data Table -->
-                <asp:GridView ID="dgvBibliotecario" runat="server" CssClass="data-table" AutoGenerateColumns="False">
+                <asp:GridView ID="dgvBibliotecario" runat="server" CssClass="data-table" AutoGenerateColumns="False"
+                    DataKeyNames="id_pregunta,dni_bib" OnRowCommand="dgvBibliotecario_RowCommand"
+                    OnRowDataBound="dgvBibliotecario_RowDataBound">
                     <Columns>
+                        <asp:TemplateField>
+                            <ItemTemplate>
+                                <asp:LinkButton ID="lnkSelect" runat="server" CommandName="Select" Text="" Style="display:none;"></asp:LinkButton>
+                            </ItemTemplate>
+                            <ItemStyle Width="0px" CssClass="hidden-button" />
+                        </asp:TemplateField>
                         <asp:BoundField DataField="dni_bib" HeaderText="DNI" />
                         <asp:BoundField DataField="nombre_bib" HeaderText="Nombre" />
                         <asp:BoundField DataField="apellidopaterno_bib" HeaderText="Apellido Paterno" />
                         <asp:BoundField DataField="apellidomaterno_bib" HeaderText="Apellido Materno" />
+                        <asp:BoundField DataField="pregunta" HeaderText="Pregunta" />
+                        <asp:BoundField DataField="respuesta_pregunta" HeaderText="Respuesta" />
+                        <asp:BoundField DataField="contraseña_bib" HeaderText="Contraseña" />
                     </Columns>
                 </asp:GridView>
             </div>
         </div>
     </form>
-
-    <script>
-        function guardarBibliotecario() { /* ... */ }
-        function modificarBibliotecario() { /* ... */ }
-        function limpiarFormulario() { /* ... */ }
-        function cerrarFormulario() { window.close(); }
-        function buscarBibliotecario() { /* ... */ }
-    </script>
 </body>
 </html>
